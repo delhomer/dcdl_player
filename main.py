@@ -1,4 +1,6 @@
 import numpy as np
+import random
+import threading
 
 # The conson and voyel lists contain duplicate versions of each letters
 # The frequency corresponds to the Scrabble letter repartition
@@ -50,3 +52,39 @@ def figure_picking():
     number_list = random.sample(NUMBERS, 6)
     result = random.sample(range(1000), 1)
     return (number_list, result)
+
+def letter_game(nb_voyels, time):
+    """ Run a letter game: choose randomly ten letter, among which there will
+    be nb_voyels voyels; there is time seconds to find the longest word
+    """
+    draw = letter_picking(nb_voyels)
+    print("Tirage composé de {0} voyelles: {1}".format(nb_voyels, draw))
+    t = threading.Timer(time, timeout)
+    t.start()
+    word = input()
+    print("Votre mot est: {0} ({1} lettres)".format(word, len(word)))
+
+def figure_game(time):
+    """ Run a figure game: choose randomly six number and one target between
+    100 and 999; there is time seconds to find the exact result
+    """
+    draw = figure_picking()
+    print("Avec les plaques suivantes : {0}\nVous devez trouver {1}".format(draw[0], draw[1]))
+    t = threading.Timer(time, timeout)
+    t.start()
+    number = input()
+    print("Votre résultat est : {0}".format(number))
+
+def timeout():
+    print("\nTemps écoulé!\n")
+
+def run(nb_set, repartition):
+    """Main program: play nb_set times a set of x figure draw(s) and y letter
+    draw(s), repartition giving how y is being larger than x 
+    
+    """
+    for i in range(1, 1+nb_set):
+        for i in range(1, 1+repartition):
+            nb_voyels = random.randint(2,8)
+            print(''.join(letter_picking(nb_voyels)))
+        print(figure_picking())
