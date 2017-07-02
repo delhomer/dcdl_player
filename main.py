@@ -40,7 +40,7 @@ def letter_picking(nb_voyels=0):
     letter_list  = list(np.random.choice(VOYELS, nb_voyels))
     letter_list = letter_list + list(np.random.choice(CONSONS, 10-nb_voyels))
     random.shuffle(letter_list)
-    return letter_list
+    return ''.join(letter_list)
 
 def figure_picking():
     """Return of list of six numbers, and a result that must be reached with
