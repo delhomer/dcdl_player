@@ -64,19 +64,21 @@ def letter_game(nb_voyels, time):
     print("Le chrono est de {0} secondes...".format(time))
     i, o, e = select.select([sys.stdin], [], [], time)
     if i:
-        word = sys.stdin.readline().strip()
+        word = sys.stdin.readline().strip().upper()
     else:
         word = ""
-    
     print("Votre mot est: {0} ({1} lettres)".format(word, len(word)))
+    if not valid_word(draw, word):
+        print("Votre mot est invalide: les lettres choisies\
+        ne sont pas toutes dans le tirage")
+        word = ""
     return word
 
-def word_verification(draw, word):
+def valid_word(draw, word):
     """ Verify if a word is valid, according to the draw
     """
     draw_list = list(draw)
-    word_list = list(word)
-    for letter in word_list:
+    for letter in word:
         if letter not in draw_list:
             return False
         else:
