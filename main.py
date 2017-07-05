@@ -53,7 +53,7 @@ def figure_picking():
     """
     number_list = random.sample(NUMBERS, 6)
     result = random.sample(range(1000), 1)
-    return (number_list, result)
+    return (number_list, *result)
 
 def letter_game(nb_voyels, time):
     """ Run a letter game: choose randomly ten letter, among which there will
@@ -90,12 +90,42 @@ def figure_game(time):
     100 and 999; there is time seconds to find the exact result
     """
     draw = figure_picking()
-    print("Avec les plaques suivantes : {0}\nVous devez trouver {1}".format(draw[0], draw[1]))
-    t = threading.Timer(time, timeout)
-    t.start()
-    number = input()
-    print("Votre résultat est : {0}".format(number))
+    print("Vous devez trouver {1}, avec: {0}".format(draw[0], draw[1]))
+    i, o, e = select.select([sys.stdin], [], [], time)
+    if i:
+        account = int(sys.stdin.readline())
+    else:
+        account = ""
+    print("Votre résultat est : {0}, vous marquez {1} points"
+          .format(account, compute_figure_score(draw[1], account)))
+    return (account, compute_figure_score(draw[1], account))
 
+def compute_figure_score(target, result):
+    """ Compute the score corresponding to the found result, knowing that
+    target was supposed to be found
+    """
+    if target == result:
+        return 10
+    elif abs(target - result) == 1:
+        return 8
+    elif abs(target - result) == 2:
+        return 7
+    elif abs(target - result) == 3:
+        return 6
+    elif abs(target - result) == 4:
+        return 5
+    elif 5 <= abs(target - result) <= 6:
+        return 4
+    elif 7 <= abs(target - result) <= 8:
+        return 3
+    elif 9 <= abs(target - result) <= 10:
+        return 2
+    elif abs(target - result) <= 100:
+        return 1
+    else:
+        return 0
+
+    
 def timeout():
     print("\nTemps écoulé!\n")
 
