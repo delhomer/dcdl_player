@@ -69,6 +69,19 @@ def letter_game(nb_voyels, time):
         word = ""
     
     print("Votre mot est: {0} ({1} lettres)".format(word, len(word)))
+    return word
+
+def word_verification(draw, word):
+    """ Verify if a word is valid, according to the draw
+    """
+    draw_list = list(draw)
+    word_list = list(word)
+    for letter in word_list:
+        if letter not in draw_list:
+            return False
+        else:
+            draw_list.remove(letter)
+    return True
 
 def figure_game(time):
     """ Run a figure game: choose randomly six number and one target between
