@@ -60,6 +60,7 @@ def letter_game(nb_voyels, time):
     be nb_voyels voyels; there is time seconds to find the longest word
     """
     draw = letter_picking(nb_voyels)
+    print("***")
     print("Tirage composé de {0} voyelles: {1}".format(nb_voyels, draw))
     print("Le chrono est de {0} secondes...".format(time))
     i, o, e = select.select([sys.stdin], [], [], time)
@@ -89,6 +90,7 @@ def figure_game(time):
     """ Run a figure game: choose randomly six number and one target between
     100 and 999; there is time seconds to find the exact result
     """
+    print("***")
     draw = figure_picking()
     print("Vous devez trouver {1}, avec: {0}".format(draw[0], draw[1]))
     i, o, e = select.select([sys.stdin], [], [], time)
