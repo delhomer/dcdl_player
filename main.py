@@ -68,12 +68,12 @@ def letter_game(nb_voyels, time):
         word = sys.stdin.readline().strip().upper()
     else:
         word = ""
-    print("Votre mot est: {0} ({1} lettres)".format(word, len(word)))
     if not valid_word(draw, word):
-        print("Votre mot est invalide: les lettres choisies\
-        ne sont pas toutes dans le tirage")
+        print("Votre mot est invalide: les lettres choisies ne sont pas toutes dans le tirage")
         word = ""
-    return word
+    print("Votre résultat est : {0}, vous marquez {1} points"
+          .format(word, len(word)))
+    return (word, len(word))
 
 def valid_word(draw, word):
     """ Verify if a word is valid, according to the draw
