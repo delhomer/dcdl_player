@@ -1,6 +1,8 @@
 import numpy as np
 import random
 import threading
+import sys
+import select
 
 # The conson and voyel lists contain duplicate versions of each letters
 # The frequency corresponds to the Scrabble letter repartition
@@ -59,9 +61,13 @@ def letter_game(nb_voyels, time):
     """
     draw = letter_picking(nb_voyels)
     print("Tirage composé de {0} voyelles: {1}".format(nb_voyels, draw))
-    t = threading.Timer(time, timeout)
-    t.start()
-    word = input()
+    print("Le chrono est de {0} secondes...".format(time))
+    i, o, e = select.select([sys.stdin], [], [], time)
+    if i:
+        word = sys.stdin.readline().strip()
+    else:
+        word = ""
+    
     print("Votre mot est: {0} ({1} lettres)".format(word, len(word)))
 
 def figure_game(time):
