@@ -37,6 +37,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=("Countdown player: pick "
                                                   "some letter and figure "
                                                   "draws"))
+    parser.add_argument('-fc', '--figure-chrono', required=False, default=40,
+                        nargs='?', type=int,
+                        help=("Number of seconds for a figure draw"))
+    parser.add_argument('-lc', '--letter-chrono', required=False, default=30,
+                        nargs='?', type=int,
+                        help=("Number of seconds for a letter draw"))
     parser.add_argument('-p', '--proportion', required=False, default=2,
                         nargs='?', type=int,
                         help=("Number of letter draws between "
@@ -46,4 +52,4 @@ if __name__ == '__main__':
                         help=("Number of draw sets"))
     args = parser.parse_args()
 
-    run(args.sets, args.proportion)
+    run(args.sets, args.proportion, args.letter_chrono, args.figure_chrono)
