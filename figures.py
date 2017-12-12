@@ -29,10 +29,11 @@ def figure_game(time):
     if i:
         account = int(sys.stdin.readline())
     else:
-        account = ""
+        account = 0
+    score = compute_figure_score(draw[1], account)
     print("Votre résultat est : {0}, vous marquez {1} points"
-          .format(account, compute_figure_score(draw[1], account)))
-    return (account, compute_figure_score(draw[1], account))
+          .format(account, score))
+    return (account, score)
 
 def compute_figure_score(target, result):
     """ Compute the score corresponding to the found result, knowing that
