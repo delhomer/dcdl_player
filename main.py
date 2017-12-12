@@ -1,4 +1,4 @@
-import datetime
+import argparse
 import numpy as np
 import random
 import threading
@@ -35,4 +35,17 @@ def run(nb_set, repartition, letter_chrono=30, figure_chrono=40):
     print("Vous avez marqué un total de {0} points durant cette partie!".format(sum(scores)))
 
 if __name__ == '__main__':
-    run(1, 2)
+
+    parser = argparse.ArgumentParser(description=("Countdown player: pick "
+                                                  "some letter and figure "
+                                                  "draws"))
+    parser.add_argument('-p', '--proportion', required=False, default=2,
+                        nargs='?', type=int,
+                        help=("Number of letter draws between "
+                              "two figure draws"))
+    parser.add_argument('-s', '--sets', required=False, default=1,
+                        nargs='?', type=int,
+                        help=("Number of draw sets"))
+    args = parser.parse_args()
+
+    run(args.sets, args.proportion)
