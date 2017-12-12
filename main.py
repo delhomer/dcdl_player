@@ -9,8 +9,6 @@ import select
 import letters
 import figures
 
-random.seed(datetime.datetime.now())
-
 def timeout():
     print("\nTemps écoulé!\n")
 
@@ -25,10 +23,10 @@ def run(nb_set, repartition, letter_chrono=30, figure_chrono=40):
     for i in range(1, 1+nb_set):
         for i in range(1, 1+repartition):
             nb_voyels = random.randint(2,8)
-            cur_letter_game = letters.letter_game(nb_voyels, 15)
+            cur_letter_game = letters.letter_game(nb_voyels, letter_chrono)
             results.append(cur_letter_game[0])
             scores.append(cur_letter_game[1])
-        cur_figure_game = figures.figure_game(15)
+        cur_figure_game = figures.figure_game(figure_chrono)
         results.append(cur_figure_game[0])
         scores.append(cur_figure_game[1])
     print("Votre feuille de résultats: {0}".format(results))
