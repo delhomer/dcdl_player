@@ -1,6 +1,8 @@
+import datetime
 import numpy as np
 import random
 import threading
+import time
 import sys
 import select
 
@@ -20,8 +22,6 @@ VOYELS = ['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'E', 'E', 'E', 'E', 'E',
            'I', 'I', 'I', 'I', 'I', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U',
            'U', 'U', 'U', 'U', 'Y']
 
-random.seed(123)
-
 def letter_picking(nb_voyels=0):
     """Return a list of ten letters, this list must be composed o  `nb_voyels` voyels
 
@@ -31,6 +31,7 @@ def letter_picking(nb_voyels=0):
         Number of desired voyels (between 2 and 8)
     
     """
+    random.seed(datetime.datetime.now())
     letter_list = np.repeat(0, 10)
     try:
         if nb_voyels < 2 or nb_voyels > 8:

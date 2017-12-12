@@ -1,3 +1,4 @@
+import datetime
 import numpy as np
 import random
 import threading
@@ -7,13 +8,12 @@ import select
 NUMBERS = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 25,
            50, 75, 100]
 
-random.seed(123)
-
 def figure_picking():
     """Return of list of six numbers, and a result that must be reached with
     these six numbers
 
     """
+    random.seed(datetime.datetime.now())
     number_list = random.sample(NUMBERS, 6)
     result = random.sample(range(1000), 1)
     return (number_list, *result)

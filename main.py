@@ -1,12 +1,16 @@
+import datetime
 import numpy as np
 import random
 import threading
+import time
 import sys
 import select
 
 import letters
 import figures
-    
+
+random.seed(datetime.datetime.now())
+
 def timeout():
     print("\nTemps écoulé!\n")
 
