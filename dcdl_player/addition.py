@@ -6,6 +6,7 @@ It highlights the added letters as well as the longer words that result.
 
 """
 
+import argparse
 import numpy as np
 import os
 import pandas as pd
@@ -64,4 +65,19 @@ def addition_as_dict(word, datapath="./data"):
     """
     additions = addition(word, datapath)
     additions = additions.groupby("draw")["display"].apply(lambda x: ' ; '.join(x))
-    return additions
+    return [{"letter": i, "word": x} for i, x in additions.iteritems()]
+
+
+if __name__=='__main__':
+
+    program_description = ("Retrieve the list of valid words obtained "
+                           "after a word addition.")
+    parser = argparse.ArgumentParser(description=program_description)
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-w', '--word', required=True,
+                        help="Word to extend")
+    args = parser.parse_args()
+
+    additions = addition_as_dict(args.word, args.lexicon_path)
+    print(additions)
