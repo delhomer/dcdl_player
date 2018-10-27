@@ -77,7 +77,7 @@ def is_word_in_draw(draw, word):
     return np.all(letter_checks)
 
 
-def human_readable_solution(solutions):
+def human_readable(solutions):
     """Print letter solution in a human-readable way
 
     Parameters
@@ -108,4 +108,4 @@ if __name__=='__main__':
     args = parser.parse_args()
 
     solutions = find_best_word(args.draw, args.lexicon_path)
-    print(human_readable_solution(solutions))
+    print(human_readable(solutions))

@@ -68,6 +68,25 @@ def addition_as_dict(word, datapath="./data"):
     return [{"letter": i, "word": x} for i, x in additions.iteritems()]
 
 
+def human_readable(additions):
+    """Print additions in a human-readable way
+
+    Parameters
+    ----------
+    additions : list
+        Additions to a given word
+
+    Returns
+    -------
+    str
+        Easily readable additions
+    """
+    result = ""
+    for a in additions:
+        result = result + a["letter"].upper() + ": " + a["word"] + "\n"
+    return result
+
+
 if __name__=='__main__':
 
     program_description = ("Retrieve the list of valid words obtained "
@@ -80,4 +99,4 @@ if __name__=='__main__':
     args = parser.parse_args()
 
     additions = addition_as_dict(args.word, args.lexicon_path)
-    print(additions)
+    print(human_readable(additions))
