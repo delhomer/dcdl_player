@@ -6,7 +6,7 @@ import numpy as np
 import os
 import pandas as pd
 
-from dcdl_player import solve_letters
+from dcdl_player.tools import solve_letters
 
 
 def verify_existence(datapath, word):
@@ -51,6 +51,29 @@ def human_readable(word, does_exist):
         return "\"{}\" is valid!".format(word)
     else:
         return  "\"{}\" is not valid!".format(word)
+
+
+
+def add_parser(subparser):
+    """
+    """
+    parser = subparser.add_parser(
+        "word_existence",
+        help="Verify the existence of a word in the lexicon.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-w', '--word', required=True,
+                        help="Word to verify")
+    parser.set_defaults(func=main)
+
+
+def main(args):
+    """
+    """
+    word_existence = verify_existence(args.lexicon_path, args.word)
+    print(human_readable(args.word, word_existence))
 
 
 if __name__=='__main__':

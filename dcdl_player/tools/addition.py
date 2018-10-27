@@ -87,6 +87,30 @@ def human_readable(additions):
     return result
 
 
+
+def add_parser(subparser):
+    """
+    """
+    parser = subparser.add_parser(
+        "addition",
+        help=("Retrieve the list of valid words obtained "
+              "after a word addition."),
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-w', '--word', required=True,
+                        help="Word to extend")
+    parser.set_defaults(func=main)
+
+
+def main(args):
+    """
+    """
+    additions = addition_as_dict(args.word, args.lexicon_path)
+    print(human_readable(additions))
+
+
 if __name__=='__main__':
 
     program_description = ("Retrieve the list of valid words obtained "

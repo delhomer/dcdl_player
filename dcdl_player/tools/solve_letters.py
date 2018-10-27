@@ -94,6 +94,28 @@ def human_readable(solutions):
     return result
 
 
+def add_parser(subparser):
+    """
+    """
+    parser = subparser.add_parser(
+        "solve_letters",
+        help="Solve a letter draw by finding the longest words.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-d', '--draw', required=True,
+                        help="Letter draw")
+    parser.set_defaults(func=main)
+
+
+def main(args):
+    """
+    """
+    solutions = find_best_word(args.draw, args.lexicon_path)
+    print(human_readable(solutions))
+
+
 if __name__=='__main__':
 
     program_description = ("Solve a letter draw by finding the longest words.")
