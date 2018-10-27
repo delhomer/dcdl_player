@@ -42,6 +42,7 @@ def find_best_word(draw, path):
         best_word_n = find_best_word_n(draw, nb_letters, path)
         best_word_n["nb_letters"] = nb_letters
         solution = solution.append(best_word_n, ignore_index=True)
+    solution["nb_letters"] = solution["nb_letters"].astype(int)
     return solution.reset_index(drop=True)
 
 
@@ -76,6 +77,26 @@ def is_word_in_draw(draw, word):
     return np.all(letter_checks)
 
 
+def human_readable_solution(solutions):
+    """Print letter solution in a human-readable way
+
+    Parameters
+    ----------
+    solutions : pandas.DataFrame
+        Letter draw best solutions, ordered by number of letters
+
+    Returns
+    -------
+    str
+        Human-readable version of `solutions`
+    """
+    result = ""
+    for i, group in solutions.groupby("nb_letters"):
+        result = result + str(i) + " letters:" + "\n"
+        result = result + " ".join(group["display"]) + "\n\n"
+    return result
+
+
 if __name__=='__main__':
 
     program_description = ("Solve a letter draw by finding the longest words.")
@@ -87,4 +108,4 @@ if __name__=='__main__':
     args = parser.parse_args()
 
     solutions = find_best_word(args.draw, args.lexicon_path)
-    print(solutions)
+    print(human_readable_solution(solutions))
