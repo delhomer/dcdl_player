@@ -20,6 +20,7 @@ def add_parsers():
     # Add your tool's entry point below.
 
     addition.add_parser(subparser)
+    solve_figures.add_parser(subparser)
     solve_letters.add_parser(subparser)
     word_existence.add_parser(subparser)
 
