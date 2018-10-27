@@ -6,9 +6,6 @@ import numpy as np
 import os
 import pandas as pd
 
-from dcdl_player import preprocess_lexicon
-from dcdl_player import addition
-
 
 def get_lexicon(path, nb_letters, sorting="draw"):
     """Get words with `nb_letters` letters, and sort them according to
