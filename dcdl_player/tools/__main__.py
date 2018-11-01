@@ -8,6 +8,7 @@ import argparse
 
 from dcdl_player.tools import (
     addition,
+    solve_figures,
     solve_letters,
     word_existence
 )

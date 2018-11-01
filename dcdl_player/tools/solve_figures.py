@@ -165,9 +165,9 @@ def add_parser(subparser):
         help="Solve a letter draw by finding the longest words.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    parser.add_argument('-d', '--draw', required=True,
+    parser.add_argument('-d', '--draw', required=True, nargs="+", type=int,
                         help="Figure draw")
-    parser.add_argument('-r', '--result', required=True,
+    parser.add_argument('-r', '--result', required=True, type=int,
                         help="Result to find")
     parser.set_defaults(func=main)
 
@@ -175,10 +175,9 @@ def add_parser(subparser):
 def main(args):
     """
     """
-    print(args.draw)
-    print(args.result)
     solutions = solve(args.draw, args.result)
     print(human_readable(solutions))
+
 
 if __name__=='__main__':
 
