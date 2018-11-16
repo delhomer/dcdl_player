@@ -35,7 +35,7 @@ def find_best_word(draw, path):
     """
     solution = pd.DataFrame({"nb_letters": [], "draw": [],
                              "word": [], "display": []})
-    for nb_letters in range(10, 1, -1):
+    for nb_letters in range(len(draw), 1, -1):
         best_word_n = find_best_word_n(draw, nb_letters, path)
         best_word_n["nb_letters"] = nb_letters
         solution = solution.append(best_word_n, ignore_index=True)
@@ -112,6 +112,7 @@ def add_parser(subparser):
 def main(args):
     """
     """
+    assert len(args.draw) <= 10, "Maximum 10 letters in the draw!"
     solutions = find_best_word(args.draw.lower(), args.lexicon_path)
     print(human_readable(solutions))
 
@@ -126,5 +127,4 @@ if __name__=='__main__':
                         help="Letter draw")
     args = parser.parse_args()
 
-    solutions = find_best_word(args.draw.lower(), args.lexicon_path)
-    print(human_readable(solutions))
+    main(args)
