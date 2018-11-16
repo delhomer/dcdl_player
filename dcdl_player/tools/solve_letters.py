@@ -112,7 +112,7 @@ def add_parser(subparser):
 def main(args):
     """
     """
-    solutions = find_best_word(args.draw, args.lexicon_path)
+    solutions = find_best_word(args.draw.lower(), args.lexicon_path)
     print(human_readable(solutions))
 
 
@@ -126,5 +126,5 @@ if __name__=='__main__':
                         help="Letter draw")
     args = parser.parse_args()
 
-    solutions = find_best_word(args.draw, args.lexicon_path)
+    solutions = find_best_word(args.draw.lower(), args.lexicon_path)
     print(human_readable(solutions))
