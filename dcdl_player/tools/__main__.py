@@ -13,24 +13,82 @@ from dcdl_player.tools import (
 )
 
 
-def add_parsers():
-    parser = argparse.ArgumentParser(prog="./dcdl")
-    subparser = parser.add_subparsers(title="dcdl_player tools", metavar="")
+def addition_parser(subparser, reference_func):
+    """Parser for addition command
 
-    # Add your tool's entry point below.
+    Parameters
+    ----------
+    subparser : argparser.parser.SubParsersAction
+    reference_func : function
+    """
+    parser = subparser.add_parser(
+        "addition",
+        help=("Retrieve the list of valid words obtained "
+              "after a word addition."),
+    )
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-w', '--word', required=True,
+                        help="Word to extend")
+    parser.set_defaults(func=reference_func)
 
-    addition.add_parser(subparser)
-    solve_letters.add_parser(subparser)
-    word_existence.add_parser(subparser)
 
-    # We return the parsed arguments, but the sub-command parsers
-    # are responsible for adding a function hook to their command.
+def solve_letters_parser(subparser, reference_func):
+    """Parser for findword command
 
-    subparser.required = True
+    Parameters
+    ----------
+    subparser : argparser.parser.SubParsersAction
+    reference_func : function
+    """
+    parser = subparser.add_parser(
+        "findword",
+        help="Solve a letter draw by finding the longest words.",
+    )
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-d', '--draw', required=True,
+                        help="Letter draw")
+    parser.set_defaults(func=reference_func)
 
-    return parser.parse_args()
+
+def word_existence_parser(subparser, reference_func):
+    """Parser for exist command
+
+    Parameters
+    ----------
+    subparser : argparser.parser.SubParsersAction
+    reference_func : function
+    """
+    parser = subparser.add_parser(
+        "exist",
+        help="Verify the existence of a word in the lexicon.",
+    )
+    parser.add_argument('-l', '--lexicon-path', default="data",
+                        help="Path to lexicon")
+    parser.add_argument('-w', '--word', required=True,
+                        help="Word to verify")
+    parser.set_defaults(func=reference_func)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="dcdl",
+        description="Small Countdown utils to play with words"
+    )
+    sub_parsers = parser.add_subparsers(dest="command")
+
+    addition_parser(sub_parsers, reference_func=addition.main)
+    solve_letters_parser(sub_parsers, reference_func=solve_letters.main)
+    word_existence_parser(sub_parsers, reference_func=word_existence.main)
+    args = parser.parse_args()
+
+    if args.func:
+        args.func(args)
+    else:
+        parser.print_help()
 
 
 if __name__ == "__main__":
-    args = add_parsers()
-    args.func(args)
+
+    main()

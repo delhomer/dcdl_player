@@ -54,21 +54,6 @@ def human_readable(word, does_exist):
 
 
 
-def add_parser(subparser):
-    """
-    """
-    parser = subparser.add_parser(
-        "word_existence",
-        help="Verify the existence of a word in the lexicon.",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    )
-    parser.add_argument('-l', '--lexicon-path', default="data",
-                        help="Path to lexicon")
-    parser.add_argument('-w', '--word', required=True,
-                        help="Word to verify")
-    parser.set_defaults(func=main)
-
-
 def main(args):
     """
     """

@@ -46,4 +46,7 @@ setup(
     python_requires='>=3',
     install_requires=install_requires,
     packages=find_packages(),
+    entry_points = {
+        "console_scripts": ["dcdl=dcdl_player.tools.__main__:main"],
+    }
 )
