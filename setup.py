@@ -17,10 +17,10 @@ with open('README.md', 'rb') as f:
     readme = f.read().decode('utf-8')
 
 install_requires = [
-    'numpy<=1.14.2',
-    'pandas<=0.22.0',
-    'daiquiri<=1.3.0',
-    'Flask<=1.0.2']
+    'numpy',
+    'pandas',
+    'daiquiri',
+    'Flask']
 
 setup(
     name='dcdl_player',
